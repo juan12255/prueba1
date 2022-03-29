@@ -7,6 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
+        <a class="navbar-item " href="<?php echo APP_URL;?>/producto">Menu</a>
         <a class="navbar-item " href="<?php echo APP_URL;?>/producto/Crear">Crear</a>
                    
         </li>

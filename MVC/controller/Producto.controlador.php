@@ -9,9 +9,9 @@ class Productocontrolador extends Controlador{
     }
 
     public function inicio(){
-        $usuario =  new Producto("","","","");
-        $usuarios = $usuario->listarTodos();
-        $this->vista->usuarios = $usuarios;
+        $producto =  new Producto("","","","");
+        $productos = $producto->listarTodos();
+        $this->vista->productos = $productos;
         $this->vista->mostrar('producto/index');
     }
 
@@ -20,13 +20,24 @@ class Productocontrolador extends Controlador{
         $this->vista->mostrar('producto/Crear');
     }
 
+
     public function almacenar()
     {
+        $id = "";
         $tproducto = $_POST['tproducto']?? "";
         $nproducto = $_POST['nproducto']?? "";
-        $producto = new Producto($tproducto,$nproducto);
+        $producto = new Producto($id,$tproducto,$nproducto);
         $producto->guardar();
-
         echo "Guardado";
+    }
+
+    public function modificar()
+    {
+        $id = "";
+        $tproducto = $_POST['tproducto']?? "";
+        $nproducto = $_POST['nproducto']?? "";
+        $producto = new Producto($id,$tproducto,$nproducto);
+        $producto->modificar($tproducto,$nproducto);
+        echo "Producto eliminado";
     }
 }
