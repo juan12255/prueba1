@@ -31,13 +31,31 @@ class Productocontrolador extends Controlador{
         echo "Guardado";
     }
 
-    public function modificar()
-    {
-        $id = "";
-        $tproducto = $_POST['tproducto']?? "";
-        $nproducto = $_POST['nproducto']?? "";
+    public function modificar(){
+        $producto =  new Producto("","","","");
+        $productos = $producto->modificar();
+        $this->vista->productos = $productos;
+        $this->vista->mostrar('producto/index');
+    }
+
+    public function actualizar(){
+        $id =$_POST['id'] ?? "";
+        $tproducto =$_POST['tproducto'] ?? "";
+        $nproducto = $_POST['nproducto'] ?? "";
         $producto = new Producto($id,$tproducto,$nproducto);
-        $producto->modificar($tproducto,$nproducto);
-        echo "Producto eliminado";
+        $producto->modificar();
+
+        $producto = new Producto("","","","");
+        $productos = $producto->listarTodos();
+        $this->vista->productos = $productos;
+        $this->vista->mostrar('producto/index');
+    }
+    public function eliminar(){
+       $producto = new Producto("","","","");
+       $productos =$producto->consulta();
+       $this->vista->productos = $productos;
+       $this->vista->mostrar('productos/borrar');
+
+       
     }
 }

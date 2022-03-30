@@ -27,11 +27,26 @@ class Producto extends Modelo
 
         }
     }
-    public function modificar($tproducto,$nproducto)
+
+    public function consulta(){
+        try {
+              $query = "SELECT *FROM productos WHERE id=".$_GET['id'];
+              $data = $this->conexion->query($query,PDO::FETCH_ASSOC);
+              $productos =[];
+              foreach($data as $row){
+                  $producto = new Producto($row['id'],$row['tproducto'],$row['categoria']);
+                  array_push($productos,$producto);
+              }
+              return $productos;
+        }catch(PDOException $error){
+            die("error no se pudo consultar el usuario".$error->getMessage());
+        }
+    }
+    public function modificar()
     {
         try
         {
-            $query = "UPDATE productos SET tproducto='$tproducto', nproducto='$nproducto'";
+            $query = "UPDATE productos SET tproducto=:tproducto, nproducto=:nproducto";
             $consulta = $this->conexion->prepare($query);
             $consulta->execute([":tproductos"=>$this->tproducto,":nproducto"=>$this->nproducto]);
         }catch(PDOException $error)
@@ -59,6 +74,9 @@ class Producto extends Modelo
         try
         {
             $query = "SELECT * FROM productos";
+            if(isset($_POST['buscar'])){
+                $query = $query."WHERE tproducto like '%".$_POST["buscar"]."%' OR nproducto like '%".$_POST["buscar"]."%'";
+            }
             $data = $this->conexion->query($query,PDO::FETCH_ASSOC);
             $productos = [];
             foreach ($data as $row) {

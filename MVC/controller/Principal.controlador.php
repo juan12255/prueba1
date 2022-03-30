@@ -11,4 +11,8 @@ class Principalcontrolador extends Controlador{
         $this->vista->mostrar("principal/index");
         
     }
+    public function defecto(){
+        $this->vista->mostrar("principal/defecto");
+        
+    }
 }
