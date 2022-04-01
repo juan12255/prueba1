@@ -7,7 +7,7 @@
         <br>
         <hr>
     </div>
-    <form class="card card-content mt-6 column is-5 mx-auto p-4" method="POST" action="<?php echo APP_URL; ?>/Producto/modificar">
+    <form class="card card-content mt-6 column is-5 mx-auto p-4" method="POST" action="<?php echo APP_URL; ?>/Producto/Eliminar">
         <?php foreach ($this->$productos as $producto) {
         ?>
 

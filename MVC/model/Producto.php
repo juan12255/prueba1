@@ -48,18 +48,18 @@ class Producto extends Modelo
         {
             $query = "UPDATE productos SET tproducto=:tproducto, nproducto=:nproducto";
             $consulta = $this->conexion->prepare($query);
-            $consulta->execute([":tproductos"=>$this->tproducto,":nproducto"=>$this->nproducto]);
+            $consulta->execute([":tproducto"=>$this->tproducto,":nproducto"=>$this->nproducto]);
         }catch(PDOException $error)
         {
             die("Error al modificar el producto:".$error->getMessage() . DB_NOMBRE);
 
         }
     }
-    public function eliminar($tproducto,$nproducto)
+    public function delete()
     {
         try
         {
-            $query = "DELETE FROM productos WHERE tproducto ='$tproducto', nproducto='$nproducto'";
+            $query = "DELETE FROM productos WHERE ID ='id'";
             $consulta = $this->conexion->prepare($query);
             $consulta->execute([":tproductos"=>$this->tproducto,":nproducto"=>$this->nproducto]);
         }catch(PDOException $error)

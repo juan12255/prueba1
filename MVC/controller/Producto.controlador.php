@@ -31,17 +31,19 @@ class Productocontrolador extends Controlador{
         echo "Guardado";
     }
 
-    public function modificar(){
+    /*public function Modificar(){
         $producto =  new Producto("","","","");
         $productos = $producto->modificar();
         $this->vista->productos = $productos;
-        $this->vista->mostrar('producto/index');
+        $this->vista->mostrar('producto/editar');
     }
+    */
 
-    public function actualizar(){
+    public function Actualizar(){
         $id =$_POST['id'] ?? "";
         $tproducto =$_POST['tproducto'] ?? "";
         $nproducto = $_POST['nproducto'] ?? "";
+
         $producto = new Producto($id,$tproducto,$nproducto);
         $producto->modificar();
 
@@ -50,11 +52,18 @@ class Productocontrolador extends Controlador{
         $this->vista->productos = $productos;
         $this->vista->mostrar('producto/index');
     }
-    public function eliminar(){
+    public function Eliminar(){
+        $id = $_POST['id']?? "";
+        $tproducto =$_POST['tproducto']?? "";
+        $nproducto =$_POST['nproducto']?? "";
+
+        $producto = new Producto($id,$tproducto,$nproducto);
+        $producto->delete();
+
        $producto = new Producto("","","","");
-       $productos =$producto->consulta();
+       $productos =$producto->listarTodos();
        $this->vista->productos = $productos;
-       $this->vista->mostrar('productos/borrar');
+       $this->vista->mostrar('producto/eliminar');
 
        
     }
