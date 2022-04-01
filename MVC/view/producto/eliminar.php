@@ -8,7 +8,7 @@
         <hr>
     </div>
     <form class="card card-content mt-6 column is-5 mx-auto p-4" method="POST" action="<?php echo APP_URL; ?>/Producto/Eliminar">
-        <?php foreach ($this->$productos as $producto) {
+        <?php foreach ($this->productos as $producto) {
         ?>
 
             <input class="input" type="hidden" name="id" value="<?php echo $producto->id; ?>">

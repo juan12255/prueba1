@@ -29,8 +29,8 @@
                         <th><?php echo $producto->id ?></th>
                         <th><?php echo $producto->tproducto ?></th>
                         <th><?php echo $producto->nproducto ?></th>
-                        <th><button type="submit" class="btn btn-primary" method="POST" action="<?php echo APP_URL; ?>/Producto/Actualizar">Modificar</button></th>
-                        <th><button type="submit" class="btn btn-primary" method="POST" action="<?php echo APP_URL; ?>/Producto/Eliminar">Eliminar</button></th>
+                        <th><a type="button" class="btn btn-primary" method="POST" href="<?php echo APP_URL; ?>/Producto/Modificar?id=<?php echo $producto->id;?>">Modificar</a></th>
+                        <th><a type="button" class="btn btn-primary" method="POST" href="<?php echo APP_URL; ?>/Producto/borrar?id=<?php echo $producto->id;?>">Eliminar</a></th>
                     </tr>
                 <?php } ?>
             </tbody>

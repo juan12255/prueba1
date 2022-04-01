@@ -30,11 +30,11 @@ class Producto extends Modelo
 
     public function consulta(){
         try {
-              $query = "SELECT *FROM productos WHERE id=".$_GET['id'];
+              $query = "SELECT * FROM productos WHERE id=".$_GET['id'];
               $data = $this->conexion->query($query,PDO::FETCH_ASSOC);
               $productos =[];
               foreach($data as $row){
-                  $producto = new Producto($row['id'],$row['tproducto'],$row['categoria']);
+                  $producto = new Producto($row['id'],$row['tproducto'],$row['nproducto']);
                   array_push($productos,$producto);
               }
               return $productos;
@@ -46,9 +46,9 @@ class Producto extends Modelo
     {
         try
         {
-            $query = "UPDATE productos SET tproducto=:tproducto, nproducto=:nproducto";
+            $query = "UPDATE productos SET tproducto=:tproducto, nproducto=:nproducto WHERE id=:id";
             $consulta = $this->conexion->prepare($query);
-            $consulta->execute([":tproducto"=>$this->tproducto,":nproducto"=>$this->nproducto]);
+            $consulta->execute([":tproducto"=>$this->tproducto,":nproducto"=>$this->nproducto,":id"=>$this->id]);
         }catch(PDOException $error)
         {
             die("Error al modificar el producto:".$error->getMessage() . DB_NOMBRE);
@@ -59,9 +59,9 @@ class Producto extends Modelo
     {
         try
         {
-            $query = "DELETE FROM productos WHERE ID ='id'";
+            $query = "DELETE FROM productos WHERE ID =:id";
             $consulta = $this->conexion->prepare($query);
-            $consulta->execute([":tproductos"=>$this->tproducto,":nproducto"=>$this->nproducto]);
+            $consulta->execute([":id"=>$this->id]);
         }catch(PDOException $error)
         {
             die("Error al eliminar el producto:".$error->getMessage() . DB_NOMBRE);
@@ -75,7 +75,7 @@ class Producto extends Modelo
         {
             $query = "SELECT * FROM productos";
             if(isset($_POST['buscar'])){
-                $query = $query."WHERE tproducto like '%".$_POST["buscar"]."%' OR nproducto like '%".$_POST["buscar"]."%'";
+                $query = $query." WHERE tproducto like '%".$_POST["buscar"]."%' OR nproducto like '%".$_POST["buscar"]."%'";
             }
             $data = $this->conexion->query($query,PDO::FETCH_ASSOC);
             $productos = [];
